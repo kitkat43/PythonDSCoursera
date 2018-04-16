@@ -1,0 +1,18 @@
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+
+di = dict()
+counts = dict()
+for line in handle:
+    if line.startswith('From '):
+       words = line.split()  #create dict from splitting lines into words
+       time = words[5].split(':') #create dict by splitting the 5th word in words at :
+       counts[time[0]] = counts.get(time[0],0) + 1  #dict of counts in the dict time
+
+tmp = list()# make a list
+for k,v in counts.items():
+    tmp.append((k,v))# append the k,v pairs in the dict counts to tmp list
+tmp.sort()# sort tmp list
+for  k,v in tmp: #iterate thru sort tmp list
+    print(k,v) # print sorted tmp list
